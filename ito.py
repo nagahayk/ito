@@ -1,1 +1,1 @@
-print("ponyo")
+print("print")
