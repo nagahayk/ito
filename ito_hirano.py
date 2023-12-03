@@ -16,8 +16,7 @@ def make1_select_number():
 
 def make2_showdown_card():
     # ------------ カードを見る説明画面 ------------
-    showdown_card_layout = [[sg.Button("Close")],
-            [sg.Button("Exit")]]
+    showdown_card_layout = [[sg.Button("Close")]]
     return sg.Window("サブウィンドウ", showdown_card_layout, font=(None,14), size=(300,120), finalize=True)
 
 # 最初に表示するウィンドウの指定
