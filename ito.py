@@ -57,13 +57,26 @@ def end():
 
 #---------------数字が小さいと思う人からカードをめくってくださいのウィンドウ---------------------
 def answer():
-    num = 8
     global win
+    cardFrame = [sg.Button(k="answerCard", size=(100,100), image_filename='./pic2.gif')]
+    #cards = []
+    #for i in range(3):
+    #    cards.append(cardFrame)
+    #    i+1
+    print("-----")
+    cards = cardFrame
+    for i in range(3):
+        cards += cardFrame
+        i+=1
+    print(cards)
+    print("-----")
+    
     left=0
     right=0
     top=0
     bottom=0
-    layout = [[sg.Text('-'*100)],
+    layout = [cards,
+              [sg.Text('-'*100)],
               [sg.Text("数字が小さいと思う人からカードをめくってください",k ="txt", size=(100,1), justification="center",pad=((left, right), (top, bottom)))],
               [sg.Text('-'*100)],
               [sg.Button(k="answerCard", size=(100,100), image_filename='./pic2.gif',pad=((left, right), (top, bottom))),sg.Button(k="answerCard", size=(100,100), image_filename='./pic2.gif',pad=((left, right), (top, bottom)))],
@@ -109,7 +122,7 @@ def peraAnswer():
     win["answerCard"].update(image_filename='./pic2.png')
         
 #初期   
-window = discussion()
+window = answer()
 startFlag = False
 
 while True:
