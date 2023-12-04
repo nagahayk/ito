@@ -5,18 +5,20 @@ import datetime
 #画像
 from PIL import Image
 import io
+
 #--------------名前入力----------------------------------
 def name():
     global win
     layout = [[sg.Text('-'*100)],
               [sg.Text("一人目 このカードを見る人の名前を入力してください",k="txt", size=(100,1), justification="center",pad=((0,0), (0,0)))],
-              [sg.Image(filename='pic2.gif', pad=((150,0), (30,30)))],
               [sg.InputText(k="txt", size=(100,1), justification="center",pad=((0,0), (0,0)))],
+              [sg.Image(filename='pic2.gif', pad=((150,0), (30,30)))],
               [sg.Text('-'*100)],
               [sg.B("つぎへ", k="btn_NameNext")],
               [sg.Text('-'*100)]]
     win = sg.Window("カードをめくる", layout,
-                font=(None,20), size=(700,700), keep_on_top=True)
+                font=(None,20), size=(1000,700), keep_on_top=True)
+  
     
 
 #--------------カードを配るウィンドウ--------------------
@@ -32,7 +34,8 @@ def card():
               [sg.Button(k="card", size=(100,100), image_filename='./pic2.gif',pad=((left, right), (top, bottom)))],
               [sg.Text('-'*100)]]
     win = sg.Window("カードをめくる", layout,
-                font=(None,20), size=(700,700), keep_on_top=True)
+                font=(None,20), size=(1000,700), keep_on_top=True)
+
 
 #--------------議論時間ウィンドウ------------------
 def discussion():
@@ -58,32 +61,76 @@ def end():
 #---------------数字が小さいと思う人からカードをめくってくださいのウィンドウ---------------------
 def answer():
     global win
-    cardFrame = [sg.Button(k="answerCard", size=(100,100), image_filename='./pic2.gif')]
-    #cards = []
-    #for i in range(3):
-    #    cards.append(cardFrame)
-    #    i+1
-    print("-----")
-    cards = cardFrame
-    for i in range(3):
-        cards += cardFrame
-        i+=1
-    print(cards)
-    print("-----")
-    
+    name1 ="いぬうさぎ"
+    cardFrame = sg.Frame(name1,[
+        [sg.Button(k="answerCard", size=(100,100), image_filename='./pic2.gif')]
+    ])
+    cardFrame2 = sg.Frame("card2",[
+        [sg.Button(k="answerCard", size=(100,100), image_filename='./pic2.gif')]
+    ])
+    cardFrame3 = sg.Frame("card3",[
+        [sg.Button(k="answerCard", size=(100,100), image_filename='./pic2.gif')]
+    ])
+    cardFrame4 = sg.Frame("card4",[
+        [sg.Button(k="answerCard", size=(100,100), image_filename='./pic2.gif')]
+    ])
+    cardFrame5 = sg.Frame("card5",[
+        [sg.Button(k="answerCard", size=(100,100), image_filename='./pic2.gif')]
+    ])
+    cardFrame6 = sg.Frame("card6",[
+        [sg.Button(k="answerCard", size=(100,100), image_filename='./pic2.gif')]
+    ])
+    cardFrame7 = sg.Frame("card7",[
+        [sg.Button(k="answerCard", size=(100,100), image_filename='./pic2.gif')]
+    ])
+    cardFrame8 = sg.Frame("card8",[
+        [sg.Button(k="answerCard", size=(100,100), image_filename='./pic2.gif')]
+    ])
     left=0
     right=0
     top=0
     bottom=0
-    layout = [cards,
-              [sg.Text('-'*100)],
-              [sg.Text("数字が小さいと思う人からカードをめくってください",k ="txt", size=(100,1), justification="center",pad=((left, right), (top, bottom)))],
-              [sg.Text('-'*100)],
-              [sg.Button(k="answerCard", size=(100,100), image_filename='./pic2.gif',pad=((left, right), (top, bottom))),sg.Button(k="answerCard", size=(100,100), image_filename='./pic2.gif',pad=((left, right), (top, bottom)))],
-              [sg.Text('-'*100)]]
+    num = 8
+    if num ==3:  
+        layout = [
+            [sg.Text("数字が小さいと思う人からカードをめくってください",k ="txt", size=(100,1), justification="center",pad=((left, right), (top, bottom)))],
+            [cardFrame,cardFrame2,cardFrame3]]
+    if num==4:
+        layout = [
+            [sg.Text("数字が小さいと思う人からカードをめくってください",k ="txt", size=(100,1), justification="center",pad=((left, right), (top, bottom)))],
+            [cardFrame,cardFrame2,cardFrame3],
+            [cardFrame4]]
+    if num==5:
+        layout = [
+            [sg.Text("数字が小さいと思う人からカードをめくってください",k ="txt", size=(100,1), justification="center",pad=((left, right), (top, bottom)))],
+            [cardFrame,cardFrame2,cardFrame3],
+            [cardFrame4,cardFrame5]]
+    if num==6:
+        layout = [
+            [sg.Text("数字が小さいと思う人からカードをめくってください",k ="txt", size=(100,1), justification="center",pad=((left, right), (top, bottom)))],
+            [cardFrame,cardFrame2,cardFrame3],
+            [cardFrame4,cardFrame5,cardFrame6]] 
+    if num==7:
+        layout = [
+            [sg.Text("数字が小さいと思う人からカードをめくってください",k ="txt", size=(100,1), justification="center",pad=((left, right), (top, bottom)))],
+            [cardFrame,cardFrame2,cardFrame3],
+            [cardFrame4,cardFrame5,cardFrame6],
+            [cardFrame7]]        
+    if num==8:
+        layout = [
+            [sg.Text("数字が小さいと思う人からカードをめくってください",k ="txt", size=(100,1), justification="center",pad=((left, right), (top, bottom)))],
+            [cardFrame,cardFrame2,cardFrame3],
+            [cardFrame4,cardFrame5,cardFrame6],
+            [cardFrame7,cardFrame8]]          
+    #layout=[[sg.Text('-'*100)]]
+        #        [sg.Text("数字が小さいと思う人からカードをめくってください",k ="txt", size=(100,1), justification="center",pad=((left, right), (top, bottom)))],
+                #[sg.Frame("()さんのカード",card), sg.Frame("()さんのカード",card)],
+         ##      [sg.Button(k="answerCard", size=(100,100), image_filename='./pic2.gif',pad=((left, right), (top, bottom))),sg.Button(k="answerCard", size=(100,100), image_filename='./pic2.gif',pad=((left, right), (top, bottom)))],
+           #     [sg.Text('-'*100)]]
     win = sg.Window("意図をたしかめる", layout,
-                font=(None,20), size=(1000,700), keep_on_top=True)
-    
+                    font=(None,20), size=(1000,700), keep_on_top=True)
+
+        
 ###カードをめくる###
 
 def pera():
@@ -122,12 +169,14 @@ def peraAnswer():
     win["answerCard"].update(image_filename='./pic2.png')
         
 #初期   
-window = answer()
+window = name()
 startFlag = False
 
 while True:
     e, v = win.read(timeout=50)
     execute()
+    if e == "btn_NameNext":
+        card()
     if e == "card":
         pera()
     if e == "btn":      
