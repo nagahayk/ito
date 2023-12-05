@@ -11,31 +11,35 @@ import datetime
 """
 
 def make1_select_number():
+    global win
     # ------------ 人数選択画面の作成 ------------
     member = [3,4,5,6,7,8]
     select_number_layout = [[sg.T("何人で遊びますか",size = (100,10), justification="center")],
     [sg.Listbox(values = member, size = (50,6))],
     [sg.Button("次へ", k="select_number")]]
     
-    return sg.Window("人数選択", select_number_layout,font=(None,14), size=(1000,700),finalize=True)
+    win = sg.Window("人数選択", select_number_layout,font=(None,14), size=(1000,700),finalize=True)
 
 
 def make2_showdown_card():
+    global win
     # ------------ カードを見る説明画面 ------------
     showdown_card_layout = [[sg.Button("次へ", k="next3")],
                             [sg.Text(select_number)]]               
-    return sg.Window("カードを見る説明", showdown_card_layout, font=(None,14), size=(1000,700), finalize=True)
+    win = sg.Window("カードを見る説明", showdown_card_layout, font=(None,14), size=(1000,700), finalize=True)
 
 def make3_show_number_next():
+    global win
     # -------------次の人に順番を回す-------------
     show_number_next = [[sg.Text("次の人に回してください")],[sg.Button("次へ", k = "next4")]]
-    return sg.Window("次の人に回す", show_number_next)
+    win = sg.Window("次の人に回す", show_number_next)
     
 def make4_show_number():
+    global win
     # -------------カードを見る画面---------------
     show_number =[[sg.Text("あなたのカードです")],
         [sg.Button("次へ", k = "next5")]]
-    return sg.Window("実際にカードを見る", show_number, font=(None,14), size=(1000,700), finalize=True)
+    win = sg.Window("実際にカードを見る", show_number, font=(None,14), size=(1000,700), finalize=True)
 
 '''
 #--------------名前入力----------------------------------
@@ -70,7 +74,11 @@ def make4_showdown():
 '''
 
 def make5_theme_select():
+    # ----------テーマを決める------------
+    global win
     layout = [[sg.T("テーマを決めてください")],[sg.B("決定", k = "next6")]]
+    win = sg.Window("テーマ決め", layout,
+                font=(None,14), size=(700,300), keep_on_top=True)
 
 #--------------議論時間ウィンドウ------------------
 def make6_discussion():
@@ -209,28 +217,28 @@ startFlag = False
 
 # 画面遷移
 while True:
-    e, v = window.read(timeout=50)
+    e, v = win.read(timeout=50)
     timeflag()
 
     if e == sg.WIN_CLOSED:
         break
-    elif e == "select_number" and values[0]:
+    elif e == "select_number" and v[0]:
         # 人数を変数に代入
-        select_number = values[0][0]
+        select_number = v[0][0]
         ## カード表示説明画面へ
-        window.close()
+        win.close()
         window = make2_showdown_card()
     elif e == "next3":
-        window.close()
+        win.close()
         window = make3_show_number_next()
     elif e == "next4":
-        window.close()
+        win.close()
         window = make4_show_number()
     elif e == "next5":
-        window.close()
+        win.close()
         window = make5_theme_select()
     elif e == "next6":
-        window.close()
+        win.close()
         window = make6_discussion()
     elif e == "btn_start":
         # 会議のタイマーを開始する      
