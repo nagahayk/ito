@@ -4,9 +4,11 @@ sg.theme("DarkBrown3")
 import datetime
 
 """
-プレイ人数: select_people
+プレイ人数: select_number
 人数選択画面: make1_select_number
 カード閲覧説明: make2_showdown_card(プレイ人数)
+
+人数分のループの回数: time
 
 """
 
@@ -18,7 +20,7 @@ def make1_select_number():
     [sg.Listbox(values = member, size = (50,6))],
     [sg.Button("次へ", k="select_number")]]
     
-    win = sg.Window("人数選択", select_number_layout,font=(None,14), size=(1000,700),finalize=True)
+    win = sg.Window("人数選択", select_number_layout,font=(None,14), size=(1000,700),keep_on_top = True)
 
 
 def make2_showdown_card():
@@ -28,22 +30,23 @@ def make2_showdown_card():
         [sg.T("今からそれぞれのカードを表示します")],
         [sg.T("はじめにカードを見る人だけ画面を見てください")],
         [sg.T("ボタンを押すとカード表示画面に移行します")],
-        [sg.Button("次へ", k="next3")]]               
-    win = sg.Window("カードを見る説明", showdown_card_layout, font=(None,14), size=(1000,700), finalize=True)
+        [sg.Button("次へ", k="next4")]]               
+    win = sg.Window("カードを見る説明", showdown_card_layout, font=(None,14), size=(1000,700), keep_on_top = True)
 
 def make3_show_number_next():
     global win
     # -------------次の人に順番を回す-------------
-    show_number_next = [[sg.Text("次の人に回してください")],[sg.Button("次へ", k = "next4")]]
-    win = sg.Window("次の人に回す", show_number_next)
-    
+    show_number_next = [[sg.Text("次の人に回してください")],[sg.Button("次へ", k = "next3")]]
+    win = sg.Window("次の人に回す", show_number_next, font=(None,14), size=(1000,700), keep_on_top = True)
+
 def make4_show_number():
     global win
     # -------------カードを見る画面---------------
-    show_number =[[sg.Text("あなたのカードです")],
-        [sg.Button("次へ", k = "next5")]]
-    win = sg.Window("実際にカードを見る", show_number, font=(None,14), size=(1000,700), finalize=True)
-
+    show_number =[[sg.T(time)],
+        [sg.Text("あなたのカードです")],
+    [sg.Button(k="card", size=(100,100), image_filename='./cardura.gif',pad=((0, 0), (0, 0)))],
+    [sg.Button("次へ", k = "next5")]]
+    win = sg.Window("実際にカードを見る", show_number, font=(None,14), size=(1000,700), keep_on_top = True)
 '''
 #--------------名前入力----------------------------------
 def make3_wright_name():
@@ -216,6 +219,7 @@ def peraAnswer():
 #初期   
 window = make1_select_number()
 startFlag = False
+time = 0
 
 
 # 画面遷移
@@ -231,15 +235,20 @@ while True:
         ## カード表示説明画面へ
         win.close()
         window = make2_showdown_card()
-    elif e == "next3":
-        win.close()
-        window = make3_show_number_next()
     elif e == "next4":
+        time += 1
         win.close()
         window = make4_show_number()
-    elif e == "next5":
+    elif e == "next3":
+        time += 1
+        win.close()
+        window = make4_show_number()
+    elif e == "next5" and time == select_number:
         win.close()
         window = make5_theme_select()
+    elif e == "next5":
+        win.close()
+        window = make3_show_number_next()
     elif e == "next6":
         win.close()
         window = make6_discussion()
