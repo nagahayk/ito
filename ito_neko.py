@@ -42,7 +42,7 @@ def make3_show_number_next():
 def make4_show_number():
     global win
     # -------------カードを見る画面---------------
-    show_number =[[sg.T(time)],
+    show_number =[[sg.T(f"{time}人目です")],
         [sg.Text("あなたのカードです")],
     [sg.Button(k="card", size=(100,100), image_filename='./cardura.gif',pad=((0, 0), (0, 0)))],
     [sg.Button("次へ", k = "next5")]]
