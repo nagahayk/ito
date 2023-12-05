@@ -2,9 +2,12 @@ import PySimpleGUI as sg
 sg.theme("DarkBrown3")
 #時間
 import datetime
-#画像
-from PIL import Image
-import io
+#ランダム
+import random
+#thinker
+import tkinter
+from tkinter import messagebox
+
 
 #--------------名前入力----------------------------------
 def name():
@@ -31,7 +34,7 @@ def card():
     layout = [[sg.Text('-'*100)],
               [sg.Text("一人目 カードをめくってください",k="txt", size=(100,1), justification="center",pad=((0,0), (0,0)))],
               [sg.Text('-'*100)],
-              [sg.Button(k="card", size=(100,100), image_filename='./pic2.gif',pad=((left, right), (top, bottom)))],
+              [sg.Button("aaa",k="card", size=(100,100), image_filename='./pic2.gif',pad=((left, right), (top, bottom)))],
               [sg.Text('-'*100)]]
     win = sg.Window("カードをめくる", layout,
                 font=(None,20), size=(1000,700), keep_on_top=True)
@@ -132,9 +135,10 @@ def answer():
 
         
 ###カードをめくる###
+randomNum = random.random()
 
 def pera():
-    win["card"].update(image_filename='./pic.gif')
+    win["card"].update(text="randomNum")
     
  
 
