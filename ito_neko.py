@@ -24,8 +24,11 @@ def make1_select_number():
 def make2_showdown_card():
     global win
     # ------------ カードを見る説明画面 ------------
-    showdown_card_layout = [[sg.Button("次へ", k="next3")],
-                            [sg.Text(select_number)]]               
+    showdown_card_layout = [[sg.Text(f"{select_number}人で遊びます！")],
+        [sg.T("今からそれぞれのカードを表示します")],
+        [sg.T("はじめにカードを見る人だけ画面を見てください")],
+        [sg.T("ボタンを押すとカード表示画面に移行します")],
+        [sg.Button("次へ", k="next3")]]               
     win = sg.Window("カードを見る説明", showdown_card_layout, font=(None,14), size=(1000,700), finalize=True)
 
 def make3_show_number_next():
